@@ -1,0 +1,31 @@
+CC = gcc
+DEBUG = -g
+CFLAGS = -Wall -pthread -std=c99 -pedantic -c $(DEBUG)
+LFLAGS = -Wall -pthread -std=c99 -pedantic $(DEBUG)
+
+sim03 : maintest.o pmdlist.o configparse.o programlist.o simtimer.o logfileList.o mmulist.o
+	$(CC) $(LFLAGS) maintest.o pmdlist.o configparse.o programlist.o simtimer.o logfileList.o mmulist.o -o sim03
+
+pmdlist.o : pmdlist.c pmdlist.h
+	$(CC) $(CFLAGS) pmdlist.c
+
+configparse.o : configparse.c configparse.h
+	$(CC) $(CFLAGS) configparse.c
+
+programlist.o : programlist.c programlist.h
+	$(CC) $(CFLAGS) programlist.c
+
+simtimer.o : simtimer.c simtimer.h
+	$(CC) $(CFLAGS) simtimer.c
+
+logfileList.o : logfileList.c logfileList.h
+	$(CC) $(CFLAGS) logfileList.c
+
+mmulist.o : mmulist.c mmulist.h
+	$(CC) $(CFLAGS) mmulist.c
+
+maintest.o : maintest.c
+	$(CC) $(CFLAGS) maintest.c
+
+clean:
+	rm *.o sim03
